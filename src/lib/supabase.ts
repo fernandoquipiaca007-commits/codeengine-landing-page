@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { LeadSubmission, COUNTRIES } from '../types';
+import { sendLeadNotificationEmail } from './email';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://ixwcdkkskhcmwdopexwt.supabase.co';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_PcHTPrXgoKsYikSqdzUYPQ_YjElfxwh';
@@ -14,14 +15,19 @@ export const AGENCY_CONFIG = {
 };
 
 /**
- * Register lead as a new Client in the shared Supabase database
- * and creates a high-priority notification for the management team.
+ * Register lead as a new Client in the shared Supabase database,
+ * sends email alert to admin via Resend, and creates a high-priority notification.
  */
 export async function submitLeadToManagementSystem(lead: LeadSubmission): Promise<{ success: boolean; clientId?: string; error?: string }> {
   try {
     const clientId = `client_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     const countryConfig = COUNTRIES[lead.country] || COUNTRIES.AO;
     const currency = countryConfig.defaultCurrency;
+
+    // Send email notification to agency in background
+    sendLeadNotificationEmail(lead).catch((err) => {
+      console.warn('[Lead Sync] Email dispatch warn:', err);
+    });
 
     // Combine primary service + additional services in notes
     const comboServices = [lead.service, ...lead.additionalServices].filter(Boolean).join(', ');
