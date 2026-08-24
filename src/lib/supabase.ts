@@ -33,39 +33,49 @@ export async function submitLeadToManagementSystem(lead: LeadSubmission): Promis
       lead.notes ? `📝 Mensagem do Cliente: ${lead.notes}` : null,
     ].filter(Boolean).join('\n');
 
-    // 1. Try to find the company_id if multi-tenant exists, or fallback to null/default
-    let companyId: string | null = null;
+    const clientType = mapServiceToClientType(lead.service);
+
+    // 1. First attempt: call PostgreSQL RPC function (bypasses RLS with SECURITY DEFINER and auto-associates company)
     try {
-      const { data: compData } = await supabase.from('companies').select('id').limit(1);
-      if (compData && compData.length > 0) {
-        companyId = compData[0].id;
+      const { data: rpcData, error: rpcError } = await supabase.rpc('submit_landing_lead', {
+        p_name: lead.name.trim(),
+        p_company: lead.company?.trim() || '',
+        p_whatsapp: lead.whatsapp.trim(),
+        p_email: lead.email?.trim() || '',
+        p_type: clientType,
+        p_country: lead.country,
+        p_currency: currency,
+        p_notes: fullNotes,
+      });
+
+      if (!rpcError && rpcData && rpcData.success) {
+        console.log('[Supabase Sync] Lead registered successfully via RPC:', rpcData);
+        return { success: true, clientId: rpcData.client_id };
       }
-    } catch {
-      // ignore
+      if (rpcError) {
+        console.warn('[Supabase Sync] RPC submit_landing_lead not available or returned error, attempting direct insert:', rpcError.message);
+      }
+    } catch (rpcEx) {
+      console.warn('[Supabase Sync] RPC call exception, attempting direct insert fallback:', rpcEx);
     }
 
-    // 2. Insert into clients table
+    // 2. Fallback attempt: Direct insert into clients table
     const clientPayload: Record<string, any> = {
       id: clientId,
       name: lead.name.trim(),
       company: lead.company?.trim() || '',
       whatsapp: lead.whatsapp.trim(),
       email: lead.email?.trim() || '',
-      type: mapServiceToClientType(lead.service),
+      type: clientType,
       country: lead.country,
       currency: currency,
       notes: fullNotes,
       created_at: new Date().toISOString(),
     };
 
-    if (companyId) {
-      clientPayload.company_id = companyId;
-    }
-
     const { error: clientError } = await supabase.from('clients').insert([clientPayload]);
     if (clientError) {
       console.warn('[Supabase Sync] Direct insert failed, trying upsert...', clientError.message);
-      // Attempt upsert without created_at if table schema is strict
       const { error: upsertErr } = await supabase.from('clients').upsert(clientPayload);
       if (upsertErr) {
         console.error('[Supabase Sync] Upsert failed:', upsertErr.message);
@@ -78,7 +88,7 @@ export async function submitLeadToManagementSystem(lead: LeadSubmission): Promis
       id: notifId,
       type: 'new_lead',
       title: '🚀 Novo Lead Captado na Landing Page!',
-      message: `${lead.name} (${lead.company || 'Pessoa Física'}) solicitou [${comboServices}]. WhatsApp: ${lead.whatsapp}`,
+      message: `Cliente ${lead.name} (${lead.company || 'Pessoa Física'}) solicitou [${comboServices}]. WhatsApp: ${lead.whatsapp}`,
       date: new Date().toISOString().split('T')[0],
       client_id: clientId,
       whatsapp_message: `Olá ${lead.name}, recebemos sua solicitação para ${lead.service} na Codeengine!`,
@@ -87,10 +97,6 @@ export async function submitLeadToManagementSystem(lead: LeadSubmission): Promis
       read: false,
       created_at: new Date().toISOString(),
     };
-
-    if (companyId) {
-      notificationPayload.company_id = companyId;
-    }
 
     try {
       await supabase.from('notifications').insert([notificationPayload]);
