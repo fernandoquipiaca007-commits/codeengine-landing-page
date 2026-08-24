@@ -10,7 +10,7 @@ export const AGENCY_CONFIG = {
   name: import.meta.env.VITE_AGENCY_NAME || 'Codeengine',
   whatsappRaw: import.meta.env.VITE_AGENCY_WHATSAPP || '+244957459336',
   whatsappDigits: (import.meta.env.VITE_AGENCY_WHATSAPP || '+244957459336').replace(/\D/g, ''),
-  email: import.meta.env.VITE_AGENCY_EMAIL || 'contato@codeengine1.com',
+  email: import.meta.env.VITE_AGENCY_EMAIL || 'codeengine2@gmail.com',
   managementUrl: import.meta.env.VITE_MANAGEMENT_URL || 'https://gestao.codeengine1.com',
 };
 
