@@ -5,8 +5,6 @@ import { MetricsBar } from './components/MetricsBar';
 import { ServicesSection } from './components/ServicesSection';
 import { LectureFunnelSpotlight } from './components/LectureFunnelSpotlight';
 import { HowItWorksSection } from './components/HowItWorksSection';
-import { RoiCalculator } from './components/RoiCalculator';
-import { TestimonialsSection } from './components/TestimonialsSection';
 import { FaqSection } from './components/FaqSection';
 import { ContactForm } from './components/ContactForm';
 import { Footer } from './components/Footer';
@@ -41,16 +39,10 @@ export const App: React.FC = () => {
         {/* 5. How It Works Step-by-Step */}
         <HowItWorksSection />
 
-        {/* 6. Interactive ROI Calculator */}
-        <RoiCalculator />
-
-        {/* 7. Client Testimonials & Results */}
-        <TestimonialsSection />
-
-        {/* 8. Lead Capture Form with Supabase Sync & WhatsApp redirect */}
+        {/* 6. Lead Capture Form with Supabase Sync & WhatsApp redirect */}
         <ContactForm selectedServicePreset={selectedService} />
 
-        {/* 9. FAQ Section */}
+        {/* 7. FAQ Section */}
         <FaqSection />
       </main>
 
