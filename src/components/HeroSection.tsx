@@ -21,7 +21,8 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectService }) => {
   const scrollToSection = (id: string) => {
-    const el = document.querySelector(id);
+    const cleanId = id.replace('#', '');
+    const el = document.getElementById(cleanId) || document.querySelector(id) || document.getElementById('solicitar') || document.getElementById('contato');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -97,13 +98,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectService }) => 
             </div>
 
             {/* Trust Footer line */}
-            <div className="pt-2 flex items-center justify-center lg:justify-start space-x-4 text-xs text-[#747878]">
-              <div className="flex -space-x-2">
-                <img className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80" alt="Cliente" />
-                <img className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80" alt="Cliente" />
-                <img className="inline-block h-7 w-7 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&auto=format&fit=crop&q=80" alt="Cliente" />
-              </div>
-              <span><strong>+100 clientes</strong> acelerados com alta conversão</span>
+            <div className="pt-2 flex items-center justify-center lg:justify-start space-x-2 text-xs text-[#747878]">
+              <ShieldCheck className="w-4 h-4 text-[#1a6b3a] shrink-0" />
+              <span><strong>+100 operações digitais</strong> estruturadas com foco em alta conversão</span>
             </div>
 
           </div>
@@ -194,17 +191,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectService }) => 
                   <span className="text-[10px] text-[#1a6b3a] font-bold shrink-0">Agora</span>
                 </div>
 
-              </div>
-
-              {/* Decorative floating badge */}
-              <div className="hidden sm:flex absolute -bottom-5 -left-5 bg-white border border-[#c4c7c7]/50 shadow-lg px-4 py-2.5 rounded-2xl items-center space-x-3 z-20 animate-float">
-                <div className="w-8 h-8 rounded-full bg-[#d4eddf] text-[#1a6b3a] flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 stroke-[2.5]" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-[#1c1b1b]">+R$ 5M+</div>
-                  <div className="text-[10px] text-[#747878]">Faturamento Gerado</div>
-                </div>
               </div>
 
             </div>

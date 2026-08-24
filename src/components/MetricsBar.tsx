@@ -7,25 +7,13 @@ export const MetricsBar: React.FC = () => {
     <section className="py-10 bg-white border-y border-[#c4c7c7]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Country Presence Flag Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-6 mb-8 text-xs font-semibold text-[#747878]">
+        {/* Country Presence Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mb-8 text-xs font-semibold text-[#747878]">
           <span className="uppercase tracking-widest text-[10px]">Atuação Internacional:</span>
-          <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
-            <span>🇧🇷</span>
-            <span>Brasil</span>
-          </span>
-          <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
-            <span>🇦🇴</span>
-            <span>Angola</span>
-          </span>
-          <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
-            <span>🇵🇹</span>
-            <span>Portugal &amp; Europa</span>
-          </span>
-          <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
-            <span>🇺🇸</span>
-            <span>Estados Unidos</span>
-          </span>
+          <span className="bg-[#f1edec] px-3.5 py-1 rounded-full text-[#1c1b1b]">Brasil</span>
+          <span className="bg-[#f1edec] px-3.5 py-1 rounded-full text-[#1c1b1b]">Angola</span>
+          <span className="bg-[#f1edec] px-3.5 py-1 rounded-full text-[#1c1b1b]">Portugal &amp; Europa</span>
+          <span className="bg-[#f1edec] px-3.5 py-1 rounded-full text-[#1c1b1b]">Estados Unidos</span>
         </div>
 
         {/* 4 Metric Cards */}

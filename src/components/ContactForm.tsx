@@ -117,7 +117,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
   };
 
   return (
-    <section id="contato" className="py-20 lg:py-28 bg-[#fcf8f8] relative">
+    <section id="solicitar" className="py-20 lg:py-28 bg-[#fcf8f8] relative scroll-mt-10">
+      <div id="contato" className="scroll-mt-20"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -289,11 +290,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                         onChange={(e) => handleCountryChange(e.target.value as CountryCode)}
                         className="boro-input-box font-semibold"
                       >
-                        <option value="BR">🇧🇷 Brasil (+55)</option>
-                        <option value="AO">🇦🇴 Angola (+244)</option>
-                        <option value="PT">🇵🇹 Portugal (+351)</option>
-                        <option value="US">🇺🇸 Estados Unidos (+1)</option>
-                        <option value="OTHER">🌐 Outro País</option>
+                        <option value="BR">Brasil (+55)</option>
+                        <option value="AO">Angola (+244)</option>
+                        <option value="PT">Portugal (+351)</option>
+                        <option value="US">Estados Unidos (+1)</option>
+                        <option value="OTHER">Outro País</option>
                       </select>
                     </div>
 

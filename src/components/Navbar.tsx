@@ -29,7 +29,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal }) => {
 
   const handleNavClick = (href: string) => {
     setMobileMenuOpen(false);
-    const element = document.querySelector(href);
+    const cleanId = href.replace('#', '');
+    const element = document.getElementById(cleanId) || document.querySelector(href) || document.getElementById('solicitar') || document.getElementById('contato');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }

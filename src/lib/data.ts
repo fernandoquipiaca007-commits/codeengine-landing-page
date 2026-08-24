@@ -163,9 +163,9 @@ export const AGENCY_TESTIMONIALS: Testimonial[] = [
 ];
 
 export const AGENCY_METRICS = [
-  { value: '+R$ 5M+', label: 'Gerados para Clientes', sublabel: 'Volume de faturamento rastreado' },
-  { value: '4.6x', label: 'ROAS Médio', sublabel: 'Retorno sobre investimento em anúncios' },
-  { value: '+120k', label: 'Leads Captados', sublabel: 'Contatos qualificados gerados' },
+  { value: '+100+', label: 'Operações Ativas', sublabel: 'Projetos e contas gerenciadas' },
+  { value: '4.6x', label: 'ROAS Médio', sublabel: 'Retorno médio sobre investimento' },
+  { value: '+120k', label: 'Leads Qualificados', sublabel: 'Contatos e oportunidades geradas' },
   { value: '98.7%', label: 'Taxa de Satisfação', sublabel: 'Retenção e aprovação de clientes' },
 ];
 
@@ -207,18 +207,14 @@ export const FAQ_ITEMS = [
   },
   {
     question: 'Como funciona o Funil de Palestras & Eventos?',
-    answer: 'Montamos toda a esteira: anúncios convidando para a palestra/webinar, landing page de inscrição rápida, grupo VIP no WhatsApp com mensagens de aquecimento e lembretes automáticos no dia do evento para garantir máxima presença e conversão.',
+    answer: 'Montamos toda a esteira: anúncios convidando para a palestra ou webinar, landing page de inscrição rápida, grupo no WhatsApp com mensagens de aquecimento e lembretes automáticos no dia do evento para garantir máxima presença e conversão.',
   },
   {
-    question: 'Qual o investimento mínimo recomendado em anúncios?',
-    answer: 'O orçamento varia conforme o seu país e nicho de atuação. Trabalhamos com clientes em Angola (a partir de 30.000 Kz/mês de verba de anúncio), Brasil (a partir de R$ 800/mês) e Portugal (a partir de 300€/mês). Nós ajudamos a calcular o valor ideal na reunião estratégica.',
+    question: 'Como acompanho os resultados das campanhas?',
+    answer: 'Você terá total transparência: relatórios periódicos de desempenho, acesso ao painel de métricas e reuniões de alinhamento com os gestores responsáveis pela sua conta.',
   },
   {
-    question: 'Como acompanho os resultados do meu investimento?',
-    answer: 'Você terá total transparência: relatórios periódicos de desempenho, acesso ao painel de métricas e reuniões de alinhamento quinzenais com os gestores responsáveis pela sua conta.',
-  },
-  {
-    question: 'Vocês também criam os vídeos e as páginas ou preciso entregar pronto?',
-    answer: 'Nossa equipe cuida de ponta a ponta! Nós escrevemos os roteiros, orientamos a gravação (ou usamos seus materiais brutos), fazemos a edição completa em padrão profissional e desenvolvemos a landing page do zero.',
+    question: 'Como funciona a edição de vídeos e criação das páginas?',
+    answer: 'Nossa equipe desenvolve a landing page do zero e cuida da edição completa dos vídeos (cortes dinâmicos, legendas animadas, sonoplastia e ganchos de alta retenção para anúncios).',
   },
 ];
