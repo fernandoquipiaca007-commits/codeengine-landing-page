@@ -22,7 +22,6 @@ Este site está conectado diretamente ao Supabase compartilhado do sistema de ge
    - `VITE_AGENCY_NAME`: `Codeengine`
    - `VITE_AGENCY_WHATSAPP`: `+244957459336`
    - `VITE_AGENCY_EMAIL`: `codeengine2@gmail.com`
-   - `VITE_MANAGEMENT_URL`: `https://gestao.codeengine1.com`
 3. Clique em **Deploy**.
 4. Vincule seu domínio personalizado nas configurações da Vercel (ex: `codeengine1.com`).
 

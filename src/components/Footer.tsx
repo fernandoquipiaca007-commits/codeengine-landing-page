@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, ArrowUpRight, Phone, Mail, MapPin, Heart, ShieldCheck } from 'lucide-react';
+import { Layers, Phone, Mail, MapPin, Heart, ShieldCheck } from 'lucide-react';
 import { AGENCY_CONFIG } from '../lib/supabase';
 
 export const Footer: React.FC = () => {
@@ -111,18 +111,6 @@ export const Footer: React.FC = () => {
                 <MapPin className="w-3.5 h-3.5 text-[#0050d7]" />
                 <span>Luanda &bull; São Paulo &bull; Lisboa</span>
               </p>
-            </div>
-
-            <div className="pt-3">
-              <a
-                href={AGENCY_CONFIG.managementUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 text-[11px] text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg"
-              >
-                <span>Acesso Painel de Gestão</span>
-                <ArrowUpRight className="w-3 h-3" />
-              </a>
             </div>
           </div>
 
