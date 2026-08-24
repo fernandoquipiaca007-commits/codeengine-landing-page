@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Send, 
   CheckCircle2, 
   Loader2, 
   MessageSquare, 
-  Building2, 
-  User, 
-  Phone, 
-  Mail, 
-  Globe, 
-  DollarSign, 
-  Sparkles, 
   ShieldCheck,
   ArrowRight,
-  ExternalLink
+  Send
 } from 'lucide-react';
 import { CountryCode, COUNTRIES, LeadSubmission } from '../types';
 import { AGENCY_SERVICES } from '../lib/data';
@@ -28,11 +20,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
   const [company, setCompany] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [email, setEmail] = useState('');
-  const [country, setCountry] = useState<CountryCode>('AO');
+  const [country, setCountry] = useState<CountryCode>('BR');
   const [service, setService] = useState<string>('Gestão de Tráfego Pago & Performance');
   const [businessType, setBusinessType] = useState<string>('Empresa / Negócio Local');
   const [additionalServices, setAdditionalServices] = useState<string[]>([]);
-  const [budgetRange, setBudgetRange] = useState<string>('Investimento Moderado');
   const [notes, setNotes] = useState('');
 
   const [loading, setLoading] = useState(false);
@@ -81,7 +72,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
 
     // Format phone with country DDI if user did not include it
     let cleanPhone = whatsapp.trim();
-    const ddi = COUNTRIES[country]?.ddi || '+244';
+    const ddi = COUNTRIES[country]?.ddi || '+55';
     if (!cleanPhone.startsWith('+') && !cleanPhone.startsWith(ddi.replace('+', ''))) {
       cleanPhone = `${ddi} ${cleanPhone}`;
     }
@@ -94,12 +85,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
       country,
       service,
       additionalServices,
-      budgetRange,
       notes: notes.trim(),
     };
 
     try {
-      // 1. Save directly to shared Supabase (clients table + notifications table)
+      // 1. Save directly to shared Supabase (clients table + notifications table + email)
       await submitLeadToManagementSystem(leadData);
 
       setLastSubmittedLead(leadData);
@@ -115,88 +105,74 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
 
     } catch (err) {
       console.error('[Submit Error]', err);
-      // Even if DB fails, allow WhatsApp redirect
       setLastSubmittedLead(leadData);
       setSuccess(true);
       const whatsappUrl = buildWhatsAppLeadUrl(leadData);
-      window.open(whatsappUrl, '_blank');
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 1200);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section id="solicitar" className="py-20 lg:py-28 bg-[#f1edec] relative">
+    <section id="contato" className="py-20 lg:py-28 bg-[#fcf8f8] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* Left Context & Instructions */}
-          <div className="lg:col-span-5 space-y-6">
-            
-            <div className="inline-flex items-center space-x-2 bg-white border border-[#c4c7c7]/50 px-3.5 py-1 rounded-full text-xs font-semibold text-[#1c1b1b]">
-              <Sparkles className="w-3.5 h-3.5 text-[#0050d7]" />
-              <span>Atendimento Direto &bull; Proposta Sob Medida</span>
+          {/* Left Column: Direct Agency Contact info */}
+          <div className="lg:col-span-5 space-y-8">
+            <div className="space-y-4">
+              <div className="inline-flex items-center space-x-2 bg-[#dbe1ff] text-[#003da9] px-3.5 py-1 rounded-full text-xs font-bold">
+                <span>Atendimento Direto &bull; Proposta Sob Medida</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1c1b1b] tracking-tight font-display">
+                Solicite uma Proposta Estratégica para seu Negócio
+              </h2>
+
+              <p className="text-base text-[#444747] leading-relaxed">
+                Preencha os dados ao lado para receber um diagnóstico gratuito. Seus dados serão cadastrados em nosso sistema e você será encaminhado diretamente ao nosso WhatsApp para alinharmos os detalhes.
+              </p>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black text-[#1c1b1b] tracking-tight font-display">
-              Solicite uma Proposta Estratégica para seu Negócio
-            </h2>
-
-            <p className="text-sm sm:text-base text-[#444747] leading-relaxed">
-              Preencha os dados ao lado para receber um diagnóstico gratuito. Seus dados serão cadastrados em nosso sistema e você será encaminhado diretamente ao nosso WhatsApp para alinharmos os detalhes.
-            </p>
-
-            {/* Steps mini list */}
-            <div className="space-y-4 pt-4 border-t border-[#c4c7c7]/40">
-              <div className="flex items-start space-x-3">
-                <div className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center text-xs font-bold shrink-0">
+            {/* Steps & Direct Contact highlights */}
+            <div className="space-y-4 pt-2">
+              <div className="flex items-start space-x-4 p-4 rounded-2xl bg-white border border-[#c4c7c7]/30">
+                <div className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-xs shrink-0">
                   1
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#1c1b1b]">Cadastro Instantâneo</h4>
-                  <p className="text-xs text-[#747878]">Seus dados entram diretamente na nossa base de atendimento prioritário.</p>
+                  <h4 className="text-sm font-bold text-[#1c1b1b]">Cadastro Instantâneo</h4>
+                  <p className="text-xs text-[#747878] mt-0.5">Seus dados entram diretamente na nossa base de atendimento prioritário.</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-3">
-                <div className="w-7 h-7 rounded-full bg-[#0050d7] text-white flex items-center justify-center text-xs font-bold shrink-0">
+              <div className="flex items-start space-x-4 p-4 rounded-2xl bg-white border border-[#c4c7c7]/30">
+                <div className="w-8 h-8 rounded-full bg-[#0050d7] text-white flex items-center justify-center font-bold text-xs shrink-0">
                   2
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#1c1b1b]">Direcionamento para WhatsApp</h4>
-                  <p className="text-xs text-[#747878]">Você é levado ao WhatsApp com a mensagem formatada para atendimento rápido.</p>
+                  <h4 className="text-sm font-bold text-[#1c1b1b]">Direcionamento para WhatsApp</h4>
+                  <p className="text-xs text-[#747878] mt-0.5">Você é levado ao WhatsApp com a mensagem formatada para atendimento rápido.</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-3">
-                <div className="w-7 h-7 rounded-full bg-[#1a6b3a] text-white flex items-center justify-center text-xs font-bold shrink-0">
+              <div className="flex items-start space-x-4 p-4 rounded-2xl bg-white border border-[#c4c7c7]/30">
+                <div className="w-8 h-8 rounded-full bg-[#1a6b3a] text-white flex items-center justify-center font-bold text-xs shrink-0">
                   3
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#1c1b1b]">Reunião &amp; Plano de Ação</h4>
-                  <p className="text-xs text-[#747878]">Apresentamos o cronograma e iniciamos a estruturação das campanhas.</p>
+                  <h4 className="text-sm font-bold text-[#1c1b1b]">Reunião &amp; Plano de Ação</h4>
+                  <p className="text-xs text-[#747878] mt-0.5">Apresentamos o cronograma e iniciamos a estruturação das campanhas.</p>
                 </div>
               </div>
             </div>
-
-            {/* Direct Contact Card */}
-            <div className="p-5 bg-white rounded-2xl border border-[#c4c7c7]/40 space-y-2">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#747878] block">
-                Contato Direto da Agência
-              </span>
-              <p className="text-sm font-bold text-[#1c1b1b] flex items-center space-x-2">
-                <span>WhatsApp:</span>
-                <span className="text-[#0050d7]">{AGENCY_CONFIG.whatsappRaw}</span>
-              </p>
-              <p className="text-xs text-[#747878]">
-                Email: {AGENCY_CONFIG.email}
-              </p>
-            </div>
-
           </div>
 
-          {/* Right Lead Capture Form Card */}
+          {/* Right Column: Lead Form Card */}
           <div className="lg:col-span-7">
             <div className="boro-card p-6 sm:p-10 bg-white border border-[#c4c7c7]/50 shadow-xl relative">
               
@@ -278,33 +254,27 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                       <label className="text-[11px] font-bold text-[#747878] uppercase tracking-wider block mb-1.5">
                         Seu Nome Completo *
                       </label>
-                      <div className="relative">
-                        <User className="w-4 h-4 text-[#747878] absolute left-3.5 top-3" />
-                        <input
-                          type="text"
-                          required
-                          placeholder="Ex: João Baptista"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className="boro-input-box pl-10"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Digite seu nome completo"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="boro-input-box font-medium"
+                      />
                     </div>
 
                     <div>
                       <label className="text-[11px] font-bold text-[#747878] uppercase tracking-wider block mb-1.5">
                         Empresa / Escritório / Marca
                       </label>
-                      <div className="relative">
-                        <Building2 className="w-4 h-4 text-[#747878] absolute left-3.5 top-3" />
-                        <input
-                          type="text"
-                          placeholder="Ex: JB Soluções &amp; Serviços"
-                          value={company}
-                          onChange={(e) => setCompany(e.target.value)}
-                          className="boro-input-box pl-10"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        placeholder="Nome da sua empresa ou marca (opcional)"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                        className="boro-input-box font-medium"
+                      />
                     </div>
                   </div>
 
@@ -317,10 +287,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                       <select
                         value={country}
                         onChange={(e) => handleCountryChange(e.target.value as CountryCode)}
-                        className="boro-input-box font-medium"
+                        className="boro-input-box font-semibold"
                       >
-                        <option value="AO">🇦🇴 Angola (+244)</option>
                         <option value="BR">🇧🇷 Brasil (+55)</option>
+                        <option value="AO">🇦🇴 Angola (+244)</option>
                         <option value="PT">🇵🇹 Portugal (+351)</option>
                         <option value="US">🇺🇸 Estados Unidos (+1)</option>
                         <option value="OTHER">🌐 Outro País</option>
@@ -331,17 +301,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                       <label className="text-[11px] font-bold text-[#747878] uppercase tracking-wider block mb-1.5">
                         Número de WhatsApp *
                       </label>
-                      <div className="relative">
-                        <Phone className="w-4 h-4 text-[#747878] absolute left-3.5 top-3" />
-                        <input
-                          type="tel"
-                          required
-                          placeholder={COUNTRIES[country]?.phonePlaceholder || '923 000 000'}
-                          value={whatsapp}
-                          onChange={(e) => setWhatsapp(e.target.value)}
-                          className="boro-input-box pl-10 font-medium"
-                        />
-                      </div>
+                      <input
+                        type="tel"
+                        required
+                        placeholder={COUNTRIES[country]?.phonePlaceholder || '(11) 98765-4321'}
+                        value={whatsapp}
+                        onChange={(e) => setWhatsapp(e.target.value)}
+                        className="boro-input-box font-semibold text-[#1c1b1b]"
+                      />
                     </div>
                   </div>
 
@@ -351,16 +318,13 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                       <label className="text-[11px] font-bold text-[#747878] uppercase tracking-wider block mb-1.5">
                         E-mail Comercial
                       </label>
-                      <div className="relative">
-                        <Mail className="w-4 h-4 text-[#747878] absolute left-3.5 top-3" />
-                        <input
-                          type="email"
-                          placeholder="contato@empresa.com"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="boro-input-box pl-10"
-                        />
-                      </div>
+                      <input
+                        type="email"
+                        placeholder="seuemail@empresa.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="boro-input-box font-medium"
+                      />
                     </div>
 
                     <div>
@@ -370,14 +334,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                       <select
                         value={businessType}
                         onChange={(e) => setBusinessType(e.target.value)}
-                        className="boro-input-box"
+                        className="boro-input-box font-medium"
                       >
                         <option value="Empresa / Negócio Local">Empresa / Negócio Local</option>
                         <option value="Infoprodutor / Mentor / Palestrante">Infoprodutor / Mentor / Palestrante</option>
-                        <option value="Agência / Escritório de Advocacia/Contabilidade">Agência / Escritório / Consultoria</option>
+                        <option value="Agência / Escritório / Consultoria">Agência / Escritório / Consultoria</option>
                         <option value="E-commerce / Loja Virtual">E-commerce / Loja Virtual</option>
-                        <option value="Profissional Liberal / Prestador de Serviços">Profissional Liberal / Autônomo</option>
-                        <option value="Outro">Outro segmento</option>
+                        <option value="Profissional Liberal / Autônomo">Profissional Liberal / Autônomo</option>
+                        <option value="Outro segmento">Outro segmento</option>
                       </select>
                     </div>
                   </div>
@@ -390,7 +354,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                     <select
                       value={service}
                       onChange={(e) => setService(e.target.value)}
-                      className="boro-input-box font-medium text-[#1c1b1b]"
+                      className="boro-input-box font-semibold text-[#1c1b1b]"
                     >
                       {AGENCY_SERVICES.map((s) => (
                         <option key={s.id} value={s.title}>
@@ -416,7 +380,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                             onClick={() => toggleAdditionalService(opt)}
                             className={`p-2.5 rounded-xl border text-left text-xs flex items-center space-x-2.5 transition-all cursor-pointer ${
                               isChecked
-                                ? 'bg-[#dbe1ff] border-[#0050d7] text-[#003da9] font-bold'
+                                ? 'bg-[#dbe1ff] border-[#0050d7] text-[#003da9] font-bold shadow-xs'
                                 : 'bg-[#f1edec] border-transparent text-[#444747] hover:bg-[#e5e2e1]'
                             }`}
                           >
@@ -432,34 +396,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({ selectedServicePreset 
                     </div>
                   </div>
 
-                  {/* Faixa de Investimento */}
-                  <div>
-                    <label className="text-[11px] font-bold text-[#747878] uppercase tracking-wider block mb-1.5">
-                      Previsão de Investimento em Anúncios / Marketing
-                    </label>
-                    <select
-                      value={budgetRange}
-                      onChange={(e) => setBudgetRange(e.target.value)}
-                      className="boro-input-box"
-                    >
-                      <option value="Inicial (Para validação)">Inicial (Para validação e testes)</option>
-                      <option value="Moderado (Crescimento estável)">Moderado (Crescimento estável)</option>
-                      <option value="Agressivo (Escala e liderança de mercado)">Agressivo (Escala e liderança de mercado)</option>
-                      <option value="A definir em reunião estratégica">A definir em reunião estratégica</option>
-                    </select>
-                  </div>
-
                   {/* Observações / Descrição do Projeto */}
                   <div>
                     <label className="text-[11px] font-bold text-[#747878] uppercase tracking-wider block mb-1.5">
-                      Conte-nos brevemente sobre o seu momento atual e seus objetivos:
+                      Conte-nos brevemente sobre seus objetivos e necessidades (Opcional):
                     </label>
                     <textarea
                       rows={3}
-                      placeholder="Ex: Queremos lotar uma palestra em Luanda no próximo mês; ou precisamos de mais clientes diários para nossa clínica/escritório..."
+                      placeholder="Ex: Queremos atrair clientes qualificados diariamente e estruturar um funil de vendas previsível..."
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
-                      className="boro-input-box resize-none"
+                      className="boro-input-box resize-none font-medium"
                     />
                   </div>
 

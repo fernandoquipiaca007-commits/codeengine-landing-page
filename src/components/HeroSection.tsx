@@ -202,7 +202,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onSelectService }) => 
                   <TrendingUp className="w-4 h-4 stroke-[2.5]" />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-[#1c1b1b]">+150M Kz / R$ 5M+</div>
+                  <div className="text-xs font-bold text-[#1c1b1b]">+R$ 5M+</div>
                   <div className="text-[10px] text-[#747878]">Faturamento Gerado</div>
                 </div>
               </div>

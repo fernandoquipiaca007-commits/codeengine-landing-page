@@ -51,7 +51,7 @@ export const HowItWorksSection: React.FC = () => {
 
               <div className="mt-6 pt-4 border-t border-[#c4c7c7]/30 flex items-center space-x-2 text-[11px] font-semibold text-[#747878]">
                 <span className="w-2 h-2 rounded-full bg-[#1a6b3a]"></span>
-                <span>Fase Concluída em 48-72h</span>
+                <span>{item.timeline}</span>
               </div>
             </div>
           ))}

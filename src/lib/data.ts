@@ -163,7 +163,7 @@ export const AGENCY_TESTIMONIALS: Testimonial[] = [
 ];
 
 export const AGENCY_METRICS = [
-  { value: '+150M Kz', label: 'Gerados para Clientes', sublabel: 'Volume de vendas rastreado' },
+  { value: '+R$ 5M+', label: 'Gerados para Clientes', sublabel: 'Volume de faturamento rastreado' },
   { value: '4.6x', label: 'ROAS Médio', sublabel: 'Retorno sobre investimento em anúncios' },
   { value: '+120k', label: 'Leads Captados', sublabel: 'Contatos qualificados gerados' },
   { value: '98.7%', label: 'Taxa de Satisfação', sublabel: 'Retenção e aprovação de clientes' },
@@ -175,24 +175,28 @@ export const HOW_IT_WORKS_STEPS = [
     title: 'Diagnóstico & Alinhamento',
     description: 'Analisamos profundamente seu produto, público-alvo, histórico de vendas e metas para desenhar a estratégia ideal.',
     badge: 'Passo 1',
+    timeline: 'Conclusão em até 24h',
   },
   {
     step: '02',
     title: 'Construção da Estrutura',
-    description: 'Criamos a landing page, configuramos pixels, criamos os criativos em vídeo e montamos os funis no WhatsApp.',
+    description: 'Montamos a landing page, configuramos os pixels de conversão, editamos os vídeos e criativos estratégicos e preparamos os funis no WhatsApp.',
     badge: 'Passo 2',
+    timeline: 'Entrega em 48h a 72h',
   },
   {
     step: '03',
     title: 'Lançamento & Otimização Diária',
-    description: 'Colocamos as campanhas no ar, testamos públicos e criativos em tempo real para baixar o custo por aquisição.',
+    description: 'Colocamos as campanhas no ar, testamos públicos e criativos em tempo real para baixar o custo por aquisição e maximizar o retorno.',
     badge: 'Passo 3',
+    timeline: 'Acompanhamento Diário',
   },
   {
     step: '04',
     title: 'Escala & Faturamento Previsível',
-    description: 'Identificados os anúncios vencedores, aumentamos os investimentos com segurança para multiplicar seu lucro.',
+    description: 'Identificados os anúncios vencedores, aumentamos os investimentos com segurança para multiplicar seu faturamento e margem de lucro.',
     badge: 'Passo 4',
+    timeline: 'Escala Contínua & Semanal',
   },
 ];
 

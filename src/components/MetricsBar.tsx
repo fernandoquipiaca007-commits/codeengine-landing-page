@@ -11,12 +11,12 @@ export const MetricsBar: React.FC = () => {
         <div className="flex flex-wrap items-center justify-center gap-6 mb-8 text-xs font-semibold text-[#747878]">
           <span className="uppercase tracking-widest text-[10px]">Atuação Internacional:</span>
           <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
-            <span>🇦🇴</span>
-            <span>Angola</span>
-          </span>
-          <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
             <span>🇧🇷</span>
             <span>Brasil</span>
+          </span>
+          <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
+            <span>🇦🇴</span>
+            <span>Angola</span>
           </span>
           <span className="flex items-center space-x-1.5 bg-[#f1edec] px-3 py-1 rounded-full text-[#1c1b1b]">
             <span>🇵🇹</span>
