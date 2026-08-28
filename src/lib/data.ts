@@ -1,4 +1,4 @@
-import { ServiceItem, Testimonial } from '../types';
+import { ServiceItem, Testimonial, VideoTestimonial } from '../types';
 
 export const AGENCY_SERVICES: ServiceItem[] = [
   {
@@ -108,6 +108,42 @@ export const AGENCY_SERVICES: ServiceItem[] = [
     deliverables: ['Gravação das reuniões estratégicas', 'Documento de diagnóstico detalhado', 'Checklist de implementação', 'Suporte prioritário via WhatsApp'],
     recommendedFor: 'CEOs, diretores e gestores que precisam de clareza estratégica.',
     iconName: 'Compass',
+  },
+];
+
+export const LAWYER_VIDEO_TESTIMONIALS: VideoTestimonial[] = [
+  {
+    id: 'dra-dina-neres',
+    name: 'Dra. Dina Neres',
+    role: 'Advogada',
+    specialty: 'Direito & Palestras Estratégicas',
+    serviceCategory: 'Funil de Palestra & Tráfego Pago',
+    highlightQuote: 'A estruturação do funil de palestras e a estratégia de tráfego pago nos deram clareza, previsibilidade e máxima autoridade diante do nosso público.',
+    fullDescription: 'Depoimento em vídeo da Dra. Dina Neres detalhando como a parceria com a CodeEngine estruturou a atração qualificada e a entrega do funil de palestras.',
+    thumbnailUrl: '/videos/dra-dina-neres-thumb.jpg',
+    videoUrl: '/videos/dra-dina-neres.mp4',
+    isFeatured: true,
+    duration: '0:53',
+  },
+  {
+    id: 'dra-larissa',
+    name: 'Dra. Larissa',
+    role: 'Advogada',
+    specialty: 'Posicionamento Jurídico',
+    serviceCategory: 'Gestão de Tráfego & Captação',
+    highlightQuote: 'Estratégias de anúncios direcionados para posicionamento institucional e prospecção de clientes qualificados.',
+    thumbnailUrl: '',
+    isUpcoming: true,
+  },
+  {
+    id: 'novos-depoimentos',
+    name: 'Novos Casos em Gravação',
+    role: 'Advogadas Parceiras',
+    specialty: 'Prospecção & Funis Digitais',
+    serviceCategory: 'Performance & Aquisição',
+    highlightQuote: 'Novas experiências em gravação com profissionais do meio jurídico que escalaram a captação com a CodeEngine.',
+    thumbnailUrl: '',
+    isUpcoming: true,
   },
 ];
 

@@ -24,6 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal }) => {
     { label: 'Serviços', href: '#servicos' },
     { label: 'Funil de Palestras', href: '#funil-palestras' },
     { label: 'Como Funciona', href: '#como-funciona' },
+    { label: 'Depoimentos', href: '#depoimentos' },
     { label: 'FAQ', href: '#faq' },
   ];
 

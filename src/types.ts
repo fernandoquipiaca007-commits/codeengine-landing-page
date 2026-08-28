@@ -72,3 +72,18 @@ export interface Testimonial {
   content: string;
   service: string;
 }
+
+export interface VideoTestimonial {
+  id: string;
+  name: string;
+  role: string;
+  specialty?: string;
+  serviceCategory: string;
+  highlightQuote: string;
+  fullDescription?: string;
+  thumbnailUrl: string;
+  videoUrl?: string;
+  isFeatured?: boolean;
+  isUpcoming?: boolean;
+  duration?: string;
+}
